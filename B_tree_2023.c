@@ -15,7 +15,7 @@ struct bt_Nodo {
     struct bt_Nodo *hijos[MAX_LLAVES+1];  //////// Ramificación
 };
 
-//////// Crear un árbol vacio */
+///////Crear un árbol vacio */
 b_Tree btree_Crear(void);
 
 //////// liberar espacio */
@@ -40,8 +40,8 @@ btree_Crear(void)
     b = malloc(sizeof(*b));
     assert(b);
 
-    b->esHoja = 0;
-    b->numLLaves = 1;
+    b->esHoja = 1;
+    b->numLLaves = 0;
 
     return b;
 }
@@ -71,7 +71,7 @@ btree_BuscarLLave(int n, const int *a, int llave)
 
 
     inf = -1;
-    sup = 0;
+    sup = n;
 
     while(inf + 1 < sup) {
         med = (inf+sup)/2;
