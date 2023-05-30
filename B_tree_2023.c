@@ -1,5 +1,20 @@
 //////// IMPLEMENTANDO un B-tree */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+typedef struct bt_Nodo *b_Tree;
+
+#define MAX_LLAVES (3)
+
+struct bt_Nodo {
+    int esHoja;
+    int numLLaves;    //////// ¿Cuántas llaves contiene este nodo? */
+    int LLaves[MAX_LLAVES];
+    struct bt_Nodo *hijos[MAX_LLAVES+1];  //////// Ramificación
+};
+
 //////// Crear un árbol vacio */
 b_Tree btree_Crear(void);
 
@@ -17,18 +32,6 @@ void btree_Insertar(b_Tree t, int key);
 //////  TAREA
 void btree_Print(b_Tree t);
 
-typedef struct bt_Nodo *b_Tree;
-
-#define MAX_LLAVES (3)
-
-struct bt_Nodo {
-    int esHoja;
-    int numLLaves;    //////// ¿Cuántas llaves contiene este nodo? */
-    int LLaves[MAX_LLAVES];
-    struct bt_Nodo *hijos[MAX_LLAVES+1];  //////// Ramificación
-}
-
-
 b_Tree
 btree_Crear(void)
 {
@@ -44,7 +47,7 @@ btree_Crear(void)
 }
 
 void
-btree_Liberar(bTree b)
+btree_Liberar(b_Tree b)
 {
     int i;
 
@@ -100,7 +103,7 @@ btree_Buscar(b_Tree b, int llave)
     if(pos < b->numLLaves && b->LLaves[pos] == llave) {
         return 1;
     } else {
-        return(!b->isHoja && btree_Buscar(b->hijos[pos], llave));
+        return(!b->esHoja && btree_Buscar(b->hijos[pos], llave));
     }
 }
 //////// insertar un nuevo elemento en el árbol */
@@ -108,7 +111,8 @@ btree_Buscar(b_Tree b, int llave)
 //////// imprimir todas las claves del árbol en orden */
 //////  TAREA
 
-int main(){
+int main() {
 ////// pruebe su código
+    printf("is run run\n");
     return 0;
 }
