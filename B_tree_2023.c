@@ -197,6 +197,17 @@ btree_Print(b_Tree t)
 
 int main() {
 ////// pruebe su código
-    printf("is run run\n");
+    b_Tree t = btree_Crear();
+
+    btree_Insertar(t, 5);
+    btree_Insertar(t, 8);
+    btree_Insertar(t, 3);
+    btree_Insertar(t, 1);
+    btree_Insertar(t, 10);
+
+    btree_Print(t);
+    printf("\n");
+
+    btree_Liberar(t);
     return 0;
 }
