@@ -1,4 +1,4 @@
-//////// IMPLEMENTANDO un B-tree */
+//////// IMPLEMENTANDO un B-tree -> Por Carlos Mijail Mamani Anccasi */
 
 #include <stdio.h>
 #include <stdlib.h>
