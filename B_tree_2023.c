@@ -129,6 +129,52 @@ btree_Insertar(b_Tree t, int key)
         t->LLaves[pos] = key;
         t->numLLaves++;
     }
+    else {
+        nuevaLlave = key;
+        nuevoHijo = malloc(sizeof(*nuevoHijo));
+        assert(nuevoHijo);
+
+        nuevoHijo = t->hijos[pos];
+
+        if(nuevoHijo->numLLaves == MAX_LLAVES) {
+            mid = nuevoHijo->numLLaves / 2;
+
+            t->hijos[pos] = malloc(sizeof(*t->hijos[pos]));
+            assert(t->hijos[pos]);
+
+            t->hijos[pos+1] = malloc(sizeof(*t->hijos[pos+1]));
+            assert(t->hijos[pos+1]);
+
+            t->hijos[pos]->esHoja = 0;
+            t->hijos[pos+1]->esHoja = 0;
+
+            t->hijos[pos]->numLLaves = mid;
+            t->hijos[pos+1]->numLLaves = nuevoHijo->numLLaves - mid - 1;
+
+            for(i = 0; i < t->hijos[pos]->numLLaves; i++) {
+                t->hijos[pos]->LLaves[i] = nuevoHijo->LLaves[i];
+            }
+
+            nuevaLlave = nuevoHijo->LLaves[mid];
+
+            for(i = 0; i < t->hijos[pos+1]->numLLaves; i++) {
+                t->hijos[pos+1]->LLaves[i] = nuevoHijo->LLaves[mid+1+i];
+            }
+
+            for(i = pos+1; i < t->numLLaves; i++) {
+                t->hijos[i+1] = t->hijos[i];
+            }
+
+            t->hijos[pos]->hijos[t->hijos[pos]->numLLaves+1] = t->hijos[pos+1]->hijos[0];
+            t->hijos[pos+1]->hijos[0] = t->hijos[pos+1]->hijos[1];
+            t->hijos[pos+1]->hijos[1] = t->hijos[pos+1]->hijos[2];
+
+            t->hijos[pos]->numLLaves++;
+            t->hijos[pos+1]->numLLaves--;
+        }
+
+        btree_Insertar(t->hijos[pos], nuevaLlave);
+    }
 }
 //////// imprimir todas las claves del árbol en orden */
 //////  TAREA
