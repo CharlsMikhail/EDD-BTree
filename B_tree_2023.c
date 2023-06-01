@@ -177,7 +177,23 @@ btree_Insertar(b_Tree t, int key)
     }
 }
 //////// imprimir todas las claves del árbol en orden */
-//////  TAREA
+
+btree_Print(b_Tree t)
+{
+    int i;
+
+    if(t->esHoja) {
+        for(i = 0; i < t->numLLaves; i++) {
+            printf("%d ", t->LLaves[i]);
+        }
+    } else {
+        for(i = 0; i < t->numLLaves; i++) {
+            btree_Print(t->hijos[i]);
+            printf("%d ", t->LLaves[i]);
+        }
+        btree_Print(t->hijos[i]);
+    }
+}
 
 int main() {
 ////// pruebe su código
