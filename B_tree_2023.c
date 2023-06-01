@@ -107,7 +107,29 @@ btree_Buscar(b_Tree b, int llave)
     }
 }
 //////// insertar un nuevo elemento en el árbol */
-/////// TAREA
+void
+btree_Insertar(b_Tree t, int key)
+{
+    int pos;
+    int mid;
+    int nuevaLlave;
+    struct bt_Nodo *nuevoHijo;
+    int i;
+
+    pos = btree_BuscarLLave(t->numLLaves, t->LLaves, key);
+
+    if(pos < t->numLLaves && t->LLaves[pos] == key) {
+        return;
+    }
+
+    if(t->esHoja) {
+        for(i = t->numLLaves; i > pos; i--) {
+            t->LLaves[i] = t->LLaves[i-1];
+        }
+        t->LLaves[pos] = key;
+        t->numLLaves++;
+    }
+}
 //////// imprimir todas las claves del árbol en orden */
 //////  TAREA
 
