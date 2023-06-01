@@ -178,6 +178,7 @@ btree_Insertar(b_Tree t, int key)
 }
 //////// imprimir todas las claves del árbol en orden */
 
+void
 btree_Print(b_Tree t)
 {
     int i;
